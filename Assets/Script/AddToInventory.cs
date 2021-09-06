@@ -10,7 +10,16 @@ public class AddToInventory : MonoBehaviour
     public void OnMouseDown()
     {
         gameObject.SetActive(false);
+        AddItem();
+    }
+
+    public void AddItem()
+    {
         InventoryManager.instance.AddItem(item, count);
+    }
+    public void DropItem()
+    {
+        InventoryManager.instance.DropItemFromInventory(item, count);
     }
 
 

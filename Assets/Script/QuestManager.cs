@@ -18,6 +18,18 @@ public class QuestManager : MonoBehaviour
 {
     public List<Quest> quests;
     public static QuestManager instance;
+    public Transform panelQuest;
+    public GameObject questInfo;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        foreach (Quest q in quests)
+        {
+            GameObject questInfoPanel = Instantiate(questInfo, panelQuest);
+            questInfoPanel.GetComponent<PanelInfoQuest>().questInfo = q.nombreQuest;
+        }
+    }
 
     private void Awake()
     {

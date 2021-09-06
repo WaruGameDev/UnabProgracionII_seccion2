@@ -35,6 +35,7 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
     public List<ItemInventory> inventory;
+    public ItemInventory dummy;
 
     public void Awake()
     {
@@ -67,5 +68,36 @@ public class InventoryManager : MonoBehaviour
         itemTemp.count = count;
         itemTemp.GetName();
         inventory.Add(itemTemp);
+    }
+    public void DropItemFromInventory(Item item, int count)
+    {
+        if (inventory.Count > 0)
+        {
+            foreach (ItemInventory i in inventory)
+            {
+                
+                if (i.item1.nameItem == item.nameItem)
+                {
+                    if(i.count >= count)
+                    {
+                        i.count -= count;
+                        if(i.count <= 0)
+                        {
+                            inventory.Remove(i);
+                        }
+                    }
+                   
+                    return;
+                }
+            }
+            AddItemToInventory(item, count);
+        }
+    }
+    private void Update()
+    {
+        if(Input.GetButtonDown("Jump"))
+        {
+            DropItemFromInventory(dummy.item1, dummy.count);
+        }
     }
 }
