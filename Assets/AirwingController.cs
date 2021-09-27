@@ -11,6 +11,7 @@ public class AirwingController : MonoBehaviour
     public float speedOnRail;
     public Vector2 limit;
     public float maxRotationY, maxRotationX, maxRotationZ;
+    public float speedRotation = 0.03f;
     public CinemachineDollyCart dolly;
     // Update is called once per frame
     void Update()
@@ -29,9 +30,9 @@ public class AirwingController : MonoBehaviour
         dolly.m_Position += speedOnRail * Time.deltaTime;
 
         Vector3 airwingRotation = model.localEulerAngles;
-        airwingRotation.x = Mathf.LerpAngle(airwingRotation.x, y * -maxRotationX, 0.2f);
-        airwingRotation.y = Mathf.LerpAngle(airwingRotation.y, x * maxRotationY, 0.2f);
-        airwingRotation.z = Mathf.LerpAngle(airwingRotation.z, x * -maxRotationZ, 0.2f);
+        airwingRotation.x = Mathf.LerpAngle(airwingRotation.x, y * -maxRotationX, speedRotation);
+        airwingRotation.y = Mathf.LerpAngle(airwingRotation.y, x * maxRotationY, speedRotation);
+        airwingRotation.z = Mathf.LerpAngle(airwingRotation.z, x * -maxRotationZ, speedRotation);
 
         model.localEulerAngles = airwingRotation;
     }
