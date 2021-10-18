@@ -6,7 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public float speedBullet;
     public float timeToDissapear;
-    public Vector3 direction;   
+    public Vector3 direction;
+    public float damage = 1;
 
     // Update is called once per frame
     void Update()
@@ -35,5 +36,13 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(timeToDissapear);
         gameObject.SetActive(false);
         yield break;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            other.GetComponent<Health>().TakeDamage(damage);
+            gameObject.SetActive(false);
+        }
     }
 }
