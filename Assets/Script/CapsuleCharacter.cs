@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
-
+using UnityEngine.Events;
 public class CapsuleCharacter : MonoBehaviour
 {
+    public UnityEvent onClickEvent;
     NavMeshAgent agent;
     bool sus;
 
@@ -24,7 +25,8 @@ public class CapsuleCharacter : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if(sus)
+        onClickEvent?.Invoke();
+        if (sus)
         {
             CapsuleManager.instance.onCallallCapsulesSuscribed -= Jump;
             sus = false;
